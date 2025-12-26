@@ -14,6 +14,9 @@ COPY . .
 # 5. Exponer el puerto en el que correrá Gunicorn
 EXPOSE 5000
 
-# 6. Comando para ejecutar la aplicación
+# 6. Inicializa la base de datos y el usuario inicial
+RUN flask init-admin
+
+# 7. Comando para ejecutar la aplicación
 #    Inicia 4 "workers" para la app, apuntando al objeto 'app' dentro del archivo 'app.py'
 CMD ["gunicorn", "-k", "gevent", "-w", "4", "--bind", "0.0.0.0:5000", "app:app"]
