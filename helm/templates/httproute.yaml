@@ -2,9 +2,9 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: {{ include "fichador.fullname" . }}
+  name: {{ include "flaskapp.fullname" . }}
   labels:
-    {{- include "fichador.labels" . | nindent 4 }}
+    {{- include "flaskapp.labels" . | nindent 4 }}
 spec:
   parentRefs:
     - name: {{ .Values.gatewayApi.gatewayName }}
@@ -17,6 +17,6 @@ spec:
             type: PathPrefix
             value: /
       backendRefs:
-        - name: {{ include "fichador.fullname" . }}
+        - name: {{ include "flaskapp.fullname" . }}
           port: {{ .Values.service.port }}
 {{- end }}

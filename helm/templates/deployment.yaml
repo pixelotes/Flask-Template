@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "fichador.fullname" . }}
+  name: {{ include "flaskapp.fullname" . }}
   labels:
-    {{- include "fichador.labels" . | nindent 4 }}
+    {{- include "flaskapp.labels" . | nindent 4 }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      {{- include "fichador.selectorLabels" . | nindent 6 }}
+      {{- include "flaskapp.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "fichador.selectorLabels" . | nindent 8 }}
+        {{- include "flaskapp.selectorLabels" . | nindent 8 }}
     spec:
       containers:
         - name: {{ .Chart.Name }}
@@ -29,7 +29,7 @@ spec:
             # OPCIÓN A: Postgres Interno (Kubernetes Service)
             {{- if eq .Values.database.type "internal" }}
             - name: SQLALCHEMY_DATABASE_URI
-              value: postgresql://{{ .Values.postgresql.auth.username }}:{{ .Values.postgresql.auth.password }}@{{ include "fichador.fullname" . }}-db:5432/{{ .Values.postgresql.auth.database }}
+              value: postgresql://{{ .Values.postgresql.auth.username }}:{{ .Values.postgresql.auth.password }}@{{ include "flaskapp.fullname" . }}-db:5432/{{ .Values.postgresql.auth.database }}
             
             # OPCIÓN B: Postgres Externo (Aurora, RDS, etc)
             {{- else if eq .Values.database.type "external" }}
@@ -103,5 +103,5 @@ spec:
         {{- if and (eq .Values.database.type "sqlite") .Values.database.sqlite.persistence.enabled }}
         - name: sqlite-data
           persistentVolumeClaim:
-            claimName: {{ include "fichador.fullname" . }}-sqlite-pvc
+            claimName: {{ include "flaskapp.fullname" . }}-sqlite-pvc
         {{- end }}

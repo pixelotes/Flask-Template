@@ -1,14 +1,14 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "fichador.name" -}}
+{{- define "flaskapp.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Create a default fully qualified app name.
 */}}
-{{- define "fichador.fullname" -}}
+{{- define "flaskapp.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -24,9 +24,9 @@ Create a default fully qualified app name.
 {{/*
 Common labels
 */}}
-{{- define "fichador.labels" -}}
-helm.sh/chart: {{ include "fichador.chart" . }}
-{{ include "fichador.selectorLabels" . }}
+{{- define "flaskapp.labels" -}}
+helm.sh/chart: {{ include "flaskapp.chart" . }}
+{{ include "flaskapp.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -36,14 +36,14 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "fichador.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "fichador.name" . }}
+{{- define "flaskapp.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "flaskapp.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "fichador.chart" -}}
+{{- define "flaskapp.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}

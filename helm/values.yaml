@@ -20,7 +20,7 @@ database:
     host: "mi-aurora-db.aws.com"
     port: 5432
     username: "admin"
-    database: "fichador_prod"
+    database: "flaskapp_prod"
     existingSecret:
       name: "secreto-kubernetes"
       key: "password"

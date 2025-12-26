@@ -2,9 +2,9 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ include "fichador.fullname" . }}
+  name: {{ include "flaskapp.fullname" . }}
   labels:
-    {{- include "fichador.labels" . | nindent 4 }}
+    {{- include "flaskapp.labels" . | nindent 4 }}
 spec:
   ingressClassName: {{ .Values.ingress.className }}
   {{- if .Values.ingress.tls }}
@@ -25,7 +25,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: {{ include "fichador.fullname" . }}
+                name: {{ include "flaskapp.fullname" . }}
                 port:
                   number: {{ .Values.service.port }}
 {{- end }}
