@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="jumbotron">
+        <h1 class="display-4">Flask App Template</h1>
+        <p class="lead">A secure and scalable starting point for your Flask applications.</p>
+        <hr class="my-4">
+
+        <h3>Features Included:</h3>
+        <ul>
+            <li><strong>Authentication:</strong> User login, logout, and password management.</li>
+            <li><strong>OAuth:</strong> Integrated with Google OAuth via Flask-Dance.</li>
+            <li><strong>Security:</strong>
+                <ul>
+                    <li>CSRF Protection (Flask-WTF)</li>
+                    <li>Rate Limiting (Flask-Limiter)</li>
+                    <li>Anti-Brute Force</li>
+                    <li>New IP Detection & MFA Email</li>
+                </ul>
+            </li>
+            <li><strong>Database:</strong> SQLAlchemy ORM with User model.</li>
+            <li><strong>UI:</strong> Bootstrap 5 with responsive sidebar and base templates.</li>
+        </ul>
+
+        <h3 class="mt-4">How to Use:</h3>
+
+        <div class="card mb-3">
+            <div class="card-header">1. CSRF Protection</div>
+            <div class="card-body">
+                <p>CSRF protection is enabled globally. Include the hidden token in your forms:</p>
+                <code class="d-block bg-light p-2 rounded">
+                    &lt;input type="hidden" name="csrf_token" value="{{ csrf_token() }}"&gt;
+                </code>
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-header">2. Flash Messages</div>
+            <div class="card-body">
+                <p>Send messages from your routes using `flash()`:</p>
+                <code class="d-block bg-light p-2 rounded mb-2">
+                    flash('Operation successful!', 'success')<br>
+                    flash('Something went wrong.', 'danger')
+                </code>
+                <p>They are automatically rendered in `base.html`.</p>
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-header">3. Creating New Routes</div>
+            <div class="card-body">
+                <p>Create a new Blueprint in `src/routes/` and register it in `src/__init__.py`.</p>
+            </div>
+        </div>
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+    </div>
+</div>
+{% endblock %}

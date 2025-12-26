@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  # -------------------------------
+  # APLICACIÓN WEB (FLASK)
+  # -------------------------------
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    depends_on:
+      - flask_app_db
+    
+    # Carga todas las variables del archivo .env al contenedor
+    env_file:
+      - .env
+
+    environment:
+      # Construimos la URI de conexión usando las variables del .env
+      - SQLALCHEMY_DATABASE_URI=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:5432/${POSTGRES_DB}
+      
+    volumes:
+      - ./instance:/app/instance
+      
+    container_name: flask_app_web
+    restart: always
+
+  # -------------------------------
+  # BASE DE DATOS (POSTGRESQL)
+  # -------------------------------
+  db:
+    image: postgres:15-alpine
+    container_name: flask_app_db
+    restart: always
+    
+    # Carga usuario/pass/db desde el .env
+    env_file:
+      - .env
+      
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres_data:
