@@ -27,3 +27,7 @@ Thumbs.db
 
 # Archivos de desarrollo
 .vscode/
+
+# Excluir logs
+logs/
+logs/*
