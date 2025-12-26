@@ -1,6 +1,6 @@
 apiVersion: v2
-name: fichador
-description: Helm chart para Fichador App con soporte Dual DB y Gateway API
+name: flask-app
+description: Helm chart para App Flask con soporte Dual DB y Gateway API
 type: application
 version: 0.1.0
 appVersion: "1.0.0"
