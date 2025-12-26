@@ -1,6 +1,6 @@
 # --- Configuración de la App ---
 image:
-  repository: pixelotes/fichador  # Cambia esto por tu imagen real
+  repository: tu/imagen  # Cambia esto por tu imagen real
   pullPolicy: IfNotPresent
   tag: "latest"
 
@@ -38,9 +38,9 @@ database:
 postgresql:
   enabled: false
   auth:
-    username: fichador
-    password: fichador_password
-    database: fichador_db
+    username: usuario
+    password: password
+    database: bbdd
   # Persistencia de la BBDD interna (puedes desactivarla si quieres que sea efímera)
   primary:
     persistence:
@@ -51,17 +51,17 @@ postgresql:
 ingress:
   enabled: false
   className: "nginx"
-  host: "fichador.local"
+  host: "flaskapp.local"
   tls: []
-  #  - secretName: fichador-tls
+  #  - secretName: flaskapp-tls
   #    hosts:
-  #      - fichador.local
+  #      - flaskapp.local
 
 gatewayApi:
   enabled: false
   gatewayName: "my-gateway"  # El nombre del Gateway existente en tu cluster
   namespace: "default"       # Namespace del Gateway
-  hostname: "fichador.example.com"
+  hostname: "flaskapp.example.com"
 
 # --- Configuración y Secretos ---
 # Variables de entorno extra
