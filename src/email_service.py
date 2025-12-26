@@ -71,7 +71,7 @@ Este código expira en 10 minutos.
 Si no has sido tú, por favor contacta con el administrador.
 
 Saludos,
-Sistema de Gestión de Fichajes
+Administrador de la Aplicación
     '''
     
     app = current_app._get_current_object()
