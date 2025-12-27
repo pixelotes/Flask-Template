@@ -11,12 +11,17 @@ RUN pip install --no-cache-dir -r requirements.txt
 # 4. Copiar todo el código de la aplicación
 COPY . .
 
-# 5. Exponer el puerto en el que correrá Gunicorn
+# 5. COPIAR Y DAR PERMISOS AL ENTRYPOINT
+COPY entrypoint.sh .
+RUN chmod +x entrypoint.sh
+
+# 6. Exponer el puerto
 EXPOSE 5000
 
-# 6. Inicializa la base de datos y el usuario inicial
-RUN flask init-admin
+# 7. ELIMINADA LA LÍNEA: RUN flask init-admin (Esto estaba mal)
 
-# 7. Comando para ejecutar la aplicación
-#    Inicia 4 "workers" para la app, apuntando al objeto 'app' dentro del archivo 'app.py'
+# 8. Definir el Entrypoint
+ENTRYPOINT ["./entrypoint.sh"]
+
+# 9. El comando por defecto sigue siendo el mismo
 CMD ["gunicorn", "-k", "gevent", "-w", "4", "--bind", "0.0.0.0:5000", "app:app"]
